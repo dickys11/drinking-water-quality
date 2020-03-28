@@ -70,9 +70,7 @@ plt.show(block=False)
 
 
 # input
-# ph = float(input('Nilai pH (0-14): '))
-# do = float(input('Nilai DO (0-10): '))
-# tds = float(input('Nilai TDS (0-300): '))
+
 
 ph = 9
 do = 3.22
