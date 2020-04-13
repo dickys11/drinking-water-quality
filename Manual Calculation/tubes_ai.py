@@ -21,19 +21,24 @@ class Trapesium:
 
 
 class Output:
-    def __init__(self, a, b, c, d):
-        self.point1 = (a, b)
-        self.point1 = (a, b)
-        self.point1 = (a, b)
-        self.point1 = (a, b)
-        self.b = b
+    def __init__(self, a, b, c, d, e):
+        self.a = a
+        self.b =
         self.c = c
         self.d = d
+        self.e = e
+
+    def hitung(self, x, y, z):
+        if self.a <= x <= self.b:
+            return x
+        elif
 
 
 def line_intersection(line1, line2):
-    xdiff = (line1[0][0] - line1[1][0], line2[0][0] - line2[1][0])
-    ydiff = (line1[0][1] - line1[1][1], line2[0][1] - line2[1][1])
+    xdiff = (line1[0][0] - line1[1][0],
+             line2[0][0] - line2[1][0])
+    ydiff = (line1[0][1] - line1[1][1],
+             line2[0][1] - line2[1][1])
 
     def det(a, b):
         return a[0] * b[1] - a[1] * b[0]
@@ -142,3 +147,10 @@ conf_lvl_good = np.fmax(rule5,
 
 print(cond_lvl_bad)
 print(conf_lvl_good)
+
+A = (40, 1)
+B = (60, 0)
+C = (40, 0)
+D = (60, 1)
+
+print(line_intersection((A, B,), (C, D)))
