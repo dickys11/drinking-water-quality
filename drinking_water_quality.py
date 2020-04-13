@@ -72,9 +72,9 @@ plt.show(block=False)
 # input
 
 
-ph = 9
+ph = 5.2
 do = 3.22
-tds = 10
+tds = 52.6
 
 # calculate the membership value of the input
 ph_lvl_low = fuzz.interp_membership(i_ph, ph_low, ph)
