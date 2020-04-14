@@ -21,17 +21,38 @@ class Trapesium:
 
 
 class Output:
-    def __init__(self, a, b, c, d, e):
+    def __init__(self, a, b, c, d, y):
         self.a = a
-        self.b =
+        self.b = b
         self.c = c
         self.d = d
-        self.e = e
+        self.y = y
 
-    def hitung(self, x, y, z):
-        if self.a <= x <= self.b:
-            return x
-        elif
+    def hitung_turun(self, x, nilai_baru):
+        if self.b <= x <= nilai_baru:
+            # print('1')
+            return self.y
+        elif self.a < x < self.b:
+            # print('2')
+            return round(float((x-self.a)/(self.b-self.a)), 2)
+        elif nilai_baru < x < self.d:
+            # print('3')
+            return round(float((self.d-x)/(self.d-self.c)), 2)
+        else:
+            return 0
+
+    def hitung_naik(self, x, nilai_baru):
+        if nilai_baru <= x <= self.c:
+            # print('1')
+            return self.y
+        elif self.a < x < nilai_baru:
+            # print('2')
+            return round(float((x-self.a)/(self.b-self.a)), 2)
+        elif self.c < x < self.d:
+            # print('3')
+            return round(float((self.d-x)/(self.d-self.c)), 2)
+        else:
+            return 0
 
 
 def line_intersection(line1, line2):
@@ -50,7 +71,6 @@ def line_intersection(line1, line2):
     d = (det(*line1), det(*line2))
     x = det(d, xdiff) / div
     y = det(d, ydiff) / div
-    return x, y
 
 
 ph_low = Trapesium(0, 0, 5, 6)
@@ -140,17 +160,47 @@ rule14 = np.fmin(tds_lvl_mid, np.fmin(do_lvl_mid, ph_lvl_mid))
 rule17 = np.fmin(tds_lvl_mid, np.fmin(do_lvl_hi, ph_lvl_mid))
 
 
-conf_lvl_good = np.fmax(rule5,
+cond_lvl_good = np.fmax(rule5,
                         np.fmax(rule8,
                                 np.fmax(rule14, rule17
                                         )))
 
-print(cond_lvl_bad)
-print(conf_lvl_good)
+# print(cond_lvl_bad)
+# print(cond_lvl_good)
 
 A = (40, 1)
 B = (60, 0)
 C = (40, 0)
 D = (60, 1)
 
-print(line_intersection((A, B,), (C, D)))
+
+def cari_x_naik(y, a, b):
+    x = round(float(y*(b-a)+a), 2)
+    return x
+
+
+def cari_x_turun(y, c, d):
+    x = round(float(-(y*(d-c)-d)), 2)
+    return x
+
+
+x_bad_baru = cari_x_turun(cond_lvl_bad, 40, 60)
+x_good_baru = cari_x_naik(cond_lvl_good, 40, 60)
+
+cond_bad_output = Output(0, 0, 40, 60, cond_lvl_bad)
+cond_good_output = Output(40, 60, 100, 100, cond_lvl_good)
+num = 0
+den = 0
+
+for i in range(10, 101, 10):
+    bad = cond_bad_output.hitung_turun(i, x_bad_baru)
+    good = cond_good_output.hitung_naik(i, x_good_baru)
+    nilai = np.fmax(bad, good)
+    # print(f"{i} = {nilai}")
+    num += i*nilai
+    den += nilai
+
+# print(num)
+# print(round(den, 2))
+nilai_akhir = num/den
+print(round(nilai_akhir, 2))
