@@ -8,25 +8,30 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         MainWindow.resize(400, 440)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setMinimumSize(QtCore.QSize(400, 440))
         MainWindow.setMaximumSize(QtCore.QSize(400, 440))
         MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
         self.label_title = QtWidgets.QLabel(self.centralwidget)
@@ -58,13 +63,16 @@ class Ui_MainWindow(object):
         self.inputLabel_do.setObjectName("inputLabel_do")
         self.gridLayout_input.addWidget(self.inputLabel_do, 1, 0, 1, 1)
         self.doubleSpinBox_ph = QtWidgets.QDoubleSpinBox(self.gridLayoutWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.doubleSpinBox_ph.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.doubleSpinBox_ph.sizePolicy().hasHeightForWidth())
         self.doubleSpinBox_ph.setSizePolicy(sizePolicy)
         self.doubleSpinBox_ph.setWrapping(False)
-        self.doubleSpinBox_ph.setButtonSymbols(QtWidgets.QAbstractSpinBox.UpDownArrows)
+        self.doubleSpinBox_ph.setButtonSymbols(
+            QtWidgets.QAbstractSpinBox.UpDownArrows)
         self.doubleSpinBox_ph.setMaximum(14.0)
         self.doubleSpinBox_ph.setSingleStep(0.1)
         self.doubleSpinBox_ph.setObjectName("doubleSpinBox_ph")
@@ -74,7 +82,8 @@ class Ui_MainWindow(object):
         self.doubleSpinBox_do.setSingleStep(0.1)
         self.doubleSpinBox_do.setObjectName("doubleSpinBox_do")
         self.gridLayout_input.addWidget(self.doubleSpinBox_do, 1, 1, 1, 1)
-        self.doubleSpinBox_tds = QtWidgets.QDoubleSpinBox(self.gridLayoutWidget)
+        self.doubleSpinBox_tds = QtWidgets.QDoubleSpinBox(
+            self.gridLayoutWidget)
         self.doubleSpinBox_tds.setMaximum(300.0)
         self.doubleSpinBox_tds.setObjectName("doubleSpinBox_tds")
         self.gridLayout_input.addWidget(self.doubleSpinBox_tds, 2, 1, 1, 1)
@@ -109,10 +118,12 @@ class Ui_MainWindow(object):
         self.outputLabel_ph.setObjectName("outputLabel_ph")
         self.memberLabel_ph_low = QtWidgets.QLabel(self.groupBox_output)
         self.memberLabel_ph_low.setGeometry(QtCore.QRect(90, 50, 41, 21))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.memberLabel_ph_low.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.memberLabel_ph_low.sizePolicy().hasHeightForWidth())
         self.memberLabel_ph_low.setSizePolicy(sizePolicy)
         self.memberLabel_ph_low.setAutoFillBackground(False)
         self.memberLabel_ph_low.setAlignment(QtCore.Qt.AlignCenter)
@@ -135,10 +146,12 @@ class Ui_MainWindow(object):
         self.memberLabel_do_high.setObjectName("memberLabel_do_high")
         self.memberLabel_do_low = QtWidgets.QLabel(self.groupBox_output)
         self.memberLabel_do_low.setGeometry(QtCore.QRect(190, 50, 41, 21))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.memberLabel_do_low.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.memberLabel_do_low.sizePolicy().hasHeightForWidth())
         self.memberLabel_do_low.setSizePolicy(sizePolicy)
         self.memberLabel_do_low.setAutoFillBackground(False)
         self.memberLabel_do_low.setAlignment(QtCore.Qt.AlignCenter)
@@ -153,10 +166,12 @@ class Ui_MainWindow(object):
         self.memberLabel_tds_high.setObjectName("memberLabel_tds_high")
         self.memberLabel_tds_low = QtWidgets.QLabel(self.groupBox_output)
         self.memberLabel_tds_low.setGeometry(QtCore.QRect(290, 50, 41, 21))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.memberLabel_tds_low.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.memberLabel_tds_low.sizePolicy().hasHeightForWidth())
         self.memberLabel_tds_low.setSizePolicy(sizePolicy)
         self.memberLabel_tds_low.setAutoFillBackground(False)
         self.memberLabel_tds_low.setAlignment(QtCore.Qt.AlignCenter)
@@ -179,17 +194,24 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Drinking Water Quality"))
-        self.label_title.setText(_translate("MainWindow", "Drinking Water Quality Testing With Fuzzy Logic"))
+        MainWindow.setWindowTitle(_translate(
+            "MainWindow", "Drinking Water Quality"))
+        self.label_title.setText(_translate(
+            "MainWindow", "Drinking Water Quality Testing With Fuzzy Logic"))
         self.pushButton_calc.setText(_translate("MainWindow", "Calculate"))
         self.groupBox_input.setTitle(_translate("MainWindow", "Input"))
-        self.inputLabel_tds.setText(_translate("MainWindow", "Inputi TDS Value (0-300)"))
-        self.inputLabel_do.setText(_translate("MainWindow", "Input Dissolved Oxygen Value (0-10)"))
-        self.inputLabel_ph.setText(_translate("MainWindow", "Input pH Value (0-14)"))
+        self.inputLabel_tds.setText(_translate(
+            "MainWindow", "Input TDS Value (0-300)"))
+        self.inputLabel_do.setText(_translate(
+            "MainWindow", "Input Dissolved Oxygen Value (0-10)"))
+        self.inputLabel_ph.setText(_translate(
+            "MainWindow", "Input pH Value (0-14)"))
         self.groupBox_output.setTitle(_translate("MainWindow", "Output"))
         self.label_condition.setText(_translate("MainWindow", "0/100"))
-        self.label_output.setText(_translate("MainWindow", "Your Drinking Water Quality"))
-        self.outputLabel_tds.setText(_translate("MainWindow", "TDS Membership"))
+        self.label_output.setText(_translate(
+            "MainWindow", "Your Drinking Water Quality"))
+        self.outputLabel_tds.setText(
+            _translate("MainWindow", "TDS Membership"))
         self.outputLabel_do.setText(_translate("MainWindow", "DO Membeship "))
         self.outputLabel_ph.setText(_translate("MainWindow", "pH Membership "))
         self.memberLabel_ph_low.setText(_translate("MainWindow", "0"))
@@ -206,4 +228,3 @@ class Ui_MainWindow(object):
         self.label_high.setText(_translate("MainWindow", "High"))
         self.actionNew.setText(_translate("MainWindow", "New"))
         self.actionNew.setStatusTip(_translate("MainWindow", "New File"))
-
