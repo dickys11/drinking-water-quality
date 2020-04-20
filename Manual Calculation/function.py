@@ -135,95 +135,69 @@ def fuzzification(input_ph, input_do, input_tds):
 
 def inference(ph_membership, do_membership, tds_membership):
     cond = {}
+    bad_cond = []
+    good_cond = []
     # Rules
     # Hasilnya bad
-    rule1 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['low'], ph_membership['low']))
-    rule2 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['low'], ph_membership['mid']))
-    rule3 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['low'], ph_membership['hi']))
-    rule4 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['mid'], ph_membership['low']))
-    rule6 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['mid'], ph_membership['hi']))
-    rule7 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['hi'], ph_membership['low']))
-    rule9 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['hi'], ph_membership['hi']))
-    rule10 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['low'], ph_membership['low']))
-    rule11 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['low'], ph_membership['mid']))
-    rule12 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['low'], ph_membership['hi']))
-    rule13 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['mid'], ph_membership['low']))
-    rule15 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['mid'], ph_membership['hi']))
-    rule16 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['hi'], ph_membership['low']))
-    rule18 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['hi'], ph_membership['hi']))
-    rule19 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['low'], ph_membership['low']))
-    rule20 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['low'], ph_membership['mid']))
-    rule21 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['low'], ph_membership['hi']))
-    rule22 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['mid'], ph_membership['low']))
-    rule23 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['mid'], ph_membership['mid']))
-    rule24 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['mid'], ph_membership['hi']))
-    rule25 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['hi'], ph_membership['low']))
-    rule26 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['hi'], ph_membership['mid']))
-    rule27 = np.fmin(tds_membership['hi'], np.fmin(
-        do_membership['hi'], ph_membership['hi']))
-
-    cond['bad'] = np.fmax(rule1,
-                          np.fmax(rule2,
-                                  np.fmax(rule3,
-                                          np.fmax(rule4,
-                                                  np.fmax(rule6,
-                                                          np.fmax(rule7,
-                                                                  np.fmax(rule9,
-                                                                          np.fmax(rule10,
-                                                                                  np.fmax(rule11,
-                                                                                          np.fmax(rule12,
-                                                                                                  np.fmax(rule13,
-                                                                                                          np.fmax(rule15,
-                                                                                                                  np.fmax(rule16,
-                                                                                                                          np.fmax(rule18,
-                                                                                                                                  np.fmax(rule19,
-                                                                                                                                          np.fmax(rule20,
-                                                                                                                                                  np.fmax(rule21,
-                                                                                                                                                          np.fmax(rule22,
-                                                                                                                                                                  np.fmax(rule23,
-                                                                                                                                                                          np.fmax(rule24,
-                                                                                                                                                                                  np.fmax(rule25,
-                                                                                                                                                                                          np.fmax(rule26, rule27
-                                                                                                                                                                                                  ))))))))))))))))))))))
+    bad_cond.append(min(tds_membership['low'],
+                        do_membership['low'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['low'],
+                        do_membership['low'], ph_membership['mid']))
+    bad_cond.append(min(tds_membership['low'],
+                        do_membership['low'], ph_membership['hi']))
+    bad_cond.append(min(tds_membership['low'],
+                        do_membership['mid'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['low'],
+                        do_membership['mid'], ph_membership['hi']))
+    bad_cond.append(min(tds_membership['low'],
+                        do_membership['hi'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['low'],
+                        do_membership['hi'], ph_membership['hi']))
+    bad_cond.append(min(tds_membership['mid'],
+                        do_membership['low'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['mid'],
+                        do_membership['low'], ph_membership['mid']))
+    bad_cond.append(min(tds_membership['mid'],
+                        do_membership['low'], ph_membership['hi']))
+    bad_cond.append(min(tds_membership['mid'],
+                        do_membership['mid'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['mid'],
+                        do_membership['mid'], ph_membership['hi']))
+    bad_cond.append(min(tds_membership['mid'],
+                        do_membership['hi'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['mid'],
+                        do_membership['hi'], ph_membership['hi']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['low'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['low'], ph_membership['mid']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['low'], ph_membership['hi']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['mid'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['mid'], ph_membership['mid']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['mid'], ph_membership['hi']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['hi'], ph_membership['low']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['hi'], ph_membership['mid']))
+    bad_cond.append(min(tds_membership['hi'],
+                        do_membership['hi'], ph_membership['hi']))
 
     # Hasilnya good
-    rule5 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['mid'], ph_membership['mid']))
-    rule8 = np.fmin(tds_membership['low'], np.fmin(
-        do_membership['hi'], ph_membership['mid']))
-    rule14 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['mid'], ph_membership['mid']))
-    rule17 = np.fmin(tds_membership['mid'], np.fmin(
-        do_membership['hi'], ph_membership['mid']))
+    good_cond.append(
+        min(tds_membership['low'], do_membership['mid'], ph_membership['mid']))
+    good_cond.append(
+        min(tds_membership['low'], do_membership['hi'], ph_membership['mid']))
+    good_cond.append(
+        min(tds_membership['mid'], do_membership['mid'], ph_membership['mid']))
+    good_cond.append(
+        min(tds_membership['mid'], do_membership['hi'], ph_membership['mid']))
 
-    cond['good'] = np.fmax(rule5,
-                           np.fmax(rule8,
-                                   np.fmax(rule14, rule17
-                                           )))
-    # print(f"bad condition membership = {cond['bad']}")
-    # print(f"good condition membership = {cond['good']}")
+    cond['bad'] = max(bad_cond)
+    cond['good'] = max(good_cond)
     return cond
 
 
