@@ -12,11 +12,13 @@ class MainWindow(Ui_MainWindow, QtWidgets.QMainWindow):
         self.show()
 
         self.pushButton_calc.clicked.connect(self.calculatePressed)
+        self.pushButton_showgraph.clicked.connect(self.showGraph)
 
     def calculatePressed(self):
         ph, do, tds = self.getInput()
+        phF, doF, tdsF = function.input_value()
         ph_membership, do_membership, tds_membership = function.fuzzification(
-            ph, do, tds)
+            phF, doF, tdsF, ph, do, tds)
 
         # print(ph_membership)
         # print(do_membership)
@@ -45,7 +47,9 @@ class MainWindow(Ui_MainWindow, QtWidgets.QMainWindow):
         cond_membership = function.inference(
             ph_membership, do_membership, tds_membership)
 
-        final_value = function.defuzzification(cond_membership)
+        doF = function.output_value()
+
+        final_value = function.defuzzification(doF, cond_membership)
         self.label_condition.setText(f'{str(round(final_value, 2))}/100')
 
     def getInput(self):
@@ -53,6 +57,11 @@ class MainWindow(Ui_MainWindow, QtWidgets.QMainWindow):
         self.inputDO = self.doubleSpinBox_do.value()
         self.inputTDS = self.doubleSpinBox_tds.value()
         return (self.inputPH, self.inputDO, self.inputTDS)
+
+    def showGraph(self):
+        phF, doF, tdsF = function.input_value()
+        condF = function.output_value()
+        function.showgraph(phF, doF, tdsF, condF)
 
 
 def main():

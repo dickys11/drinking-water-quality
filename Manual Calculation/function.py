@@ -12,6 +12,15 @@ class Trapezoid:
         self.b = b
         self.c = c
         self.d = d
+        if a == b:
+            self.x = [b, c, d]
+            self.y = [1, 1, 0]
+        elif c == d:
+            self.x = [a, b, c]
+            self.y = [0, 1, 1]
+        else:
+            self.x = [a, b, c, d]
+            self.y = [0, 1, 1, 0]
 
     def membership(self, x):
         """
@@ -64,6 +73,12 @@ class Trapezoid:
 
         return membership_value
 
+    def get_coor_x(self):
+        return self.x
+
+    def get_coor_y(self):
+        return self.y
+
 
 class Output:
     def __init__(self, a, b, c, d, y):
@@ -100,41 +115,49 @@ class Output:
             return 0
 
 
-def fuzzification(input_ph, input_do, input_tds):
+def input_value():
     # inisialisasi input
-    ph_low = Trapezoid(0, 0, 5, 6)
-    ph_mid = Trapezoid(5, 6, 9, 10)
-    ph_hi = Trapezoid(9, 10, 14, 14)
+    ph = {}
+    do = {}
+    tds = {}
 
-    do_low = Trapezoid(0, 0, 3, 3.5)
-    do_mid = Trapezoid(3, 3.5, 4.5, 5)
-    do_hi = Trapezoid(4.5, 5, 10, 10)
+    ph['low'] = Trapezoid(0, 0, 5, 6)
+    ph['mid'] = Trapezoid(5, 6, 9, 10)
+    ph['hi'] = Trapezoid(9, 10, 14, 14)
 
-    tds_low = Trapezoid(0, 0, 50, 70)
-    tds_mid = Trapezoid(50, 70, 180, 200)
-    tds_hi = Trapezoid(180, 200, 300, 300)
+    do['low'] = Trapezoid(0, 0, 3, 3.5)
+    do['mid'] = Trapezoid(3, 3.5, 4.5, 5)
+    do['hi'] = Trapezoid(4.5, 5, 10, 10)
 
+    tds['low'] = Trapezoid(0, 0, 50, 70)
+    tds['mid'] = Trapezoid(50, 70, 180, 200)
+    tds['hi'] = Trapezoid(180, 200, 300, 300)
+
+    return ph, do, tds
+
+
+def fuzzification(ph, do, tds, input_ph, input_do, input_tds):
     ph_membership = {}
     do_membership = {}
     tds_membership = {}
 
-    ph_membership['low'] = ph_low.membership(input_ph)
-    ph_membership['mid'] = ph_mid.membership(input_ph)
-    ph_membership['hi'] = ph_hi.membership(input_ph)
+    ph_membership['low'] = ph['low'].membership(input_ph)
+    ph_membership['mid'] = ph['mid'].membership(input_ph)
+    ph_membership['hi'] = ph['hi'].membership(input_ph)
 
-    do_membership['low'] = do_low.membership(input_do)
-    do_membership['mid'] = do_mid.membership(input_do)
-    do_membership['hi'] = do_hi.membership(input_do)
+    do_membership['low'] = do['low'].membership(input_do)
+    do_membership['mid'] = do['mid'].membership(input_do)
+    do_membership['hi'] = do['hi'].membership(input_do)
 
-    tds_membership['low'] = tds_low.membership(input_tds)
-    tds_membership['mid'] = tds_mid.membership(input_tds)
-    tds_membership['hi'] = tds_hi.membership(input_tds)
+    tds_membership['low'] = tds['low'].membership(input_tds)
+    tds_membership['mid'] = tds['mid'].membership(input_tds)
+    tds_membership['hi'] = tds['hi'].membership(input_tds)
 
     return ph_membership, do_membership, tds_membership
 
 
 def inference(ph_membership, do_membership, tds_membership):
-    cond = {}
+    cond_membership = {}
     bad_cond = []
     good_cond = []
     # Rules
@@ -196,25 +219,70 @@ def inference(ph_membership, do_membership, tds_membership):
     good_cond.append(
         min(tds_membership['mid'], do_membership['hi'], ph_membership['mid']))
 
-    cond['bad'] = max(bad_cond)
-    cond['good'] = max(good_cond)
+    cond_membership['bad'] = max(bad_cond)
+    cond_membership['good'] = max(good_cond)
+    return cond_membership
+
+
+def output_value():
+    cond = {}
+    cond['bad'] = Trapezoid(0, 0, 40, 60)
+    cond['good'] = Trapezoid(40, 60, 100, 100)
     return cond
 
 
-def defuzzification(cond_membership):
-    cond_bad = Trapezoid(0, 0, 40, 60)
-    cond_good = Trapezoid(40, 60, 100, 100)
+def defuzzification(cond, cond_membership):
+    # cond_bad = Trapezoid(0, 0, 40, 60)
+    # cond_good = Trapezoid(40, 60, 100, 100)
 
     # print('bad')
     # print('good')
     num = 0
     den = 0
     for i in range(10, 101, 10):
-        value = np.fmax(cond_bad.output(cond_membership['bad'], i),
-                        cond_good.output(cond_membership['good'], i))
+        value = np.fmax(cond['bad'].output(cond_membership['bad'], i),
+                        cond['good'].output(cond_membership['good'], i))
         num += i*value
         den += value
 
     final_value = num/den
     # print(round(final_value, 2))
     return final_value
+
+
+def showgraph(ph, do, tds, cond):
+    fig, (ax0, ax1, ax2, ax3) = plt.subplots(nrows=4)
+    ax0.plot(ph['low'].get_coor_x(), ph['low'].get_coor_y(), 'r', label="low")
+    ax0.plot(ph['mid'].get_coor_x(), ph['mid'].get_coor_y(), 'g', label="mid")
+    ax0.plot(ph['hi'].get_coor_x(), ph['hi'].get_coor_y(), 'y', label="hi")
+    ax0.set_title('pH')
+    ax0.legend()
+
+    ax1.plot(do['low'].get_coor_x(), do['low'].get_coor_y(), 'r', label="low")
+    ax1.plot(do['mid'].get_coor_x(), do['mid'].get_coor_y(), 'g', label="mid")
+    ax1.plot(do['hi'].get_coor_x(), do['hi'].get_coor_y(), 'y', label="hi")
+    ax1.set_title('DO')
+    ax1.legend()
+
+    ax2.plot(tds['low'].get_coor_x(),
+             tds['low'].get_coor_y(), 'r', label="low")
+    ax2.plot(tds['mid'].get_coor_x(),
+             tds['mid'].get_coor_y(), 'g', label="mid")
+    ax2.plot(tds['hi'].get_coor_x(), do['hi'].get_coor_y(), 'y', label="hi")
+    ax2.set_title('TDS')
+    ax2.legend()
+
+    ax3.plot(cond['bad'].get_coor_x(),
+             cond['bad'].get_coor_y(), 'r', label="bad")
+    ax3.plot(cond['good'].get_coor_x(),
+             cond['good'].get_coor_y(), 'g', label="good")
+    ax3.set_title('Condition')
+    ax3.legend()
+
+    for ax in (ax0, ax1, ax2, ax3):
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.get_xaxis().tick_bottom()
+        ax.get_yaxis().tick_left()
+    plt.tight_layout()
+    plt.show()
