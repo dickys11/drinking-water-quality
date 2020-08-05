@@ -192,9 +192,13 @@ condition_activation = fuzz.interp_membership(
     o_cond, aggregated, condition)  # for plot
 
 # plot
+print(o_cond)
+print(cond_bad)
+print(cond_good)
+print(cond0)
 ax0.plot(o_cond, cond_bad, 'r', linewidth=0.5, linestyle='--', )
 ax0.plot(o_cond, cond_good, 'g', linewidth=0.5, linestyle='--')
-ax0.fill_between(o_cond, cond0, aggregated, facecolor='Orange', alpha=0.7)
+ax0.fill_between(o_cond, cond0, aggregated, facecolor='Blue', alpha=0.7)
 ax0.plot([condition, condition], [0, condition_activation],
          'k', linewidth=1.5, alpha=0.9)
 ax0.set_title('Aggregated membership and result (line)')

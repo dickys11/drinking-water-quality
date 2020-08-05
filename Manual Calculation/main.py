@@ -1,5 +1,4 @@
 import sys
-import numpy as np
 import function
 from gui import Ui_MainWindow
 from PyQt5 import QtWidgets
